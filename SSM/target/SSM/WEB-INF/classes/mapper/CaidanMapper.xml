@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cm.dao.CaidanMapper" >
+  <resultMap id="BaseResultMap" type="com.cm.model.Caidan" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="caiming" property="caiming" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from caidan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cm.model.Caidan" >
+    insert into caidan (id, caiming)
+    values (#{id,jdbcType=INTEGER}, #{caiming,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cm.model.Caidan" >
+    update caidan
+    set caiming = #{caiming,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, caiming
+    from caidan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, caiming
+    from caidan
+  </select>
+  <select id="selectById" parameterType="Map" resultMap="BaseResultMap">
+    SELECT  *
+    from caidan
+    where id=#{id}
+  </select>
+</mapper>

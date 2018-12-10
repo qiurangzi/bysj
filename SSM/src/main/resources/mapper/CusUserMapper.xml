@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cm.dao.CusUserMapper" >
+  <resultMap id="BaseResultMap" type="com.cm.model.CusUser" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
+    <result column="phone_no" property="phoneNo" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select user_id, user_name, user_pass, phone_no
+    from cus_user
+  </select>
+  <select id="checkPhone" parameterType="Map" resultMap="BaseResultMap">
+    select *
+    from cus_user
+    where phone_no=#{phoneNo}
+  </select>
+  <insert id="reg" parameterType="Map">
+    insert
+    into cus_user
+    (user_name,user_pass,phone_no)
+    values (#{userName},#{userPass},#{phoneNo})
+  </insert>
+  <select id="selectLogin" parameterType="Map" resultMap="BaseResultMap">
+    select *
+    from cus_user
+    where user_name=#{userName} and user_pass=#{userPass}
+  </select>
+</mapper>
